@@ -98,7 +98,7 @@ Finally we can begin the training. We specify our data channels as the inputs fo
 ---
 ## Code Walkthrough: Hyperparameter Tuning
 
-This walkthrough takes you through the code used to automatically tune a models hyperparameters. We will look at the files in our Jupyter Notebook called 334-label/resize-96/tune.ipynb and 50-label/resize-96/tune.ipynb. 
+This walkthrough takes you through the code used to automatically tune a models hyperparameters. We will look at the files in our Jupyter Notebook called ``334-label/resize-96/tune.ipynb`` and ``50-label/resize-96/tune.ipynb``. 
 
 Creating a hyperparameter tuning job is very similar to creating a normal training job. One difference is instead of hard-coding the values of hyperparameters, we set ranges of hyper-parameter values. The hyperparameter tuning job will automatically train and re-train models adjusting the hyperparameters within the ranges we set.
 

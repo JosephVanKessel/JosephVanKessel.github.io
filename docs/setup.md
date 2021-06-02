@@ -11,4 +11,5 @@ After completing these steps you can run training jobs from the jupyter notebook
 Next Steps:
 
 - Read about the [tools and services](tands.md) we used to create models.
+- Read the [system overview](system.md) to learn about the structure and components of our system.
 - Follow the [code walkthroughs](code-walthroughs.md) to learn how the code in the Jupyter notebook works. 

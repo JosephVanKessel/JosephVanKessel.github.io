@@ -207,5 +207,6 @@ Check out [Code Walkthrough: Training](code-walthroughs.md#code-walkthrough-trai
 ## Model Deployment
 Trained models can be deployed to endpoints with sagemaker. The endpoint can then receive input data from a client application and pass it to the trained model. The models output is then returned back to the client application through the endpoint. 
 
+For more information on model deployment read [Deploy a Model to an Endpoint in SageMaker](https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works-deployment.html).
 
 
