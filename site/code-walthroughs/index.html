@@ -331,12 +331,12 @@ for path in s3_paths:
 path = mxnet.test_utils.get_im2rec_path()
 print(path)
 </code></pre>
-<p>Copy the printed and save it somewhere.</p>
+<p>Copy the printed path and save it somewhere. We will use this path later on to run the im2rec tool.</p>
 <p>At this point we should have the following:</p>
 <ul>
 <li>A file called: <code>train.lst</code> containing the label data and local paths to training images.</li>
 <li>A file called: <code>val.lst</code> containing the label data and local paths to validation images.</li>
-<li>The local path to <code>im2rec.py</code> </li>
+<li>The path to <code>im2rec.py</code> </li>
 <li><code>images</code> directory containing all downloaded images</li>
 </ul>
 <p>The following shows the output of running <code>im2rec.py -h</code>. You can see there are many options and arguments, so lets narrow down the most important ones. </p>
@@ -373,7 +373,7 @@ Options for creating image lists:
 --recursive           If true recursively walk through subdirs and assign an
                         unique label to images in each folder. Otherwise only
                         include images in the root folder and give them label
-                        0. (default: False)
+                        1. (default: False)
 --no-shuffle          If this is passed, im2rec will not randomize the image
                         order in &lt;prefix&gt;.lst (default: True)
 

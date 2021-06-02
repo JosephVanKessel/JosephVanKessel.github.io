@@ -70,7 +70,7 @@
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#recordio">RecordIO</a>
+    <li class="toctree-l2"><a class="reference internal" href="#mxnet">MXNet</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#boto3">Boto3</a>
     </li>
@@ -133,30 +133,24 @@
 </ol>
 <p>Lets take a look at these services in detail. </p>
 <h3 id="amazon-simple-storage-amazon-s3">Amazon Simple Storage (Amazon S3):</h3>
-<p>Amazon Simple Storage (Amazon S3) allows cloud-based data storage.</p>
-<p>We use Amazon S3 to store our training and validation data. After we created our processed datasets we uploaded them to S3. When training a model these datasets will be fetched from S3.</p>
+<p>Amazon Simple Storage (Amazon S3) provides cloud-based data storage.</p>
+<p>We use Amazon S3 to store our training and validation data. After creating our processed datasets we upload them to S3. When training a model these datasets will be fetched from S3.</p>
 <h3 id="amazon-sagemaker">Amazon SageMaker:</h3>
 <p>Amazon SageMaker is a machine learning service that allows developers to train tune and deploy models. </p>
 <h4 id="notebook-instances">Notebook Instances:</h4>
 <p><em>SageMaker Notebook Instances</em> are machine learning compute instances that run the <em>Jupyter Notebook App</em>. These instances allow us to do a variety of tasks related to the production of machine learning models. </p>
 <p>After creating a <em>Notebook Instance</em> we can open a <em>Jupyter Notebook</em> within it. The <em>Jupyter Notebook</em> is where we write our code to: setup, run and evaluate training jobs. </p>
-<p>Check out our <a href="../code-walthroughs/">Code Walkthroughs</a> to see the code in our Jupyter Notebook.</p>
-<p>Additional Resources:</p>
-<ul>
-<li><a href="https://www.youtube.com/watch?v=ym7NEYEx9x4">Video: Overview of SageMaker</a></li>
-<li><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/howitworks-create-ws.html">Create a Notebook Instance</a></li>
-<li><a href="https://docs.aws.amazon.com/sagemaker/?id=docs_gateway">Official Amazon SageMaker Documentation</a></li>
-<li><a href="https://docs.aws.amazon.com/s3/?id=docs_gateway">Official Amazon S3 documentation</a></li>
-<li><a href="https://docs.aws.amazon.com/">AWS documentation</a></li>
-</ul>
+<p>Check out <a href="../code-walthroughs/#code-walkthrough-training">Code Walkthrough: Training</a> and <a href="../code-walthroughs/#code-walkthrough-hyperparameter-tuning">Code Walkthrough: Hyperparameter Tuning</a> to see how we trained models from our Jupyter notebook.</p>
 <hr />
-<h2 id="recordio">RecordIO</h2>
-<p>Our data sets were created in the RecordIO data format. We used a tool called im2rec.py to convert images and label data into usable .rec files. </p>
-<p>For more information about how we created our datasets see <a href="../system/">System Overview</a>.</p>
-<p>For more information about MXNet's RecordIO data format and the im2rec.py tool see <a href="https://mxnet.apache.org/versions/1.8.0/api/faq/recordio">Creating a Dataset Using RecordIO</a>.</p>
+<h2 id="mxnet">MXNet</h2>
+<p>MXNet is an open source deep learning library. We used one specific tool provided by the MXNet library called im2rec. This tool allowed us to create our datasets in the RecordIO data format. </p>
+<p>For more information about MXNet's RecordIO data format and the im2rec tool see <a href="https://mxnet.apache.org/versions/1.8.0/api/faq/recordio">Creating a Dataset Using RecordIO</a>.</p>
+<p>Also check out <a href="../code-walthroughs/#code-walkthrough-creating-datasets">Code Walkthrough: Creating Datasets</a> to see how we created the datasets in the RecordIO format.</p>
+<hr />
 <h2 id="boto3">Boto3</h2>
-<p>We used the Boto3 AWS SDK to connect to Amazon S3 and download images. </p>
-<p>Check out the <a href="https://boto3.amazonaws.com/v1/documentation/api/latest/index.html">boto3 documentation</a> for more information.</p>
+<p>We used the Boto3 AWS SDK to connect python scripts to Amazon S3 and download images. </p>
+<p>Check out <a href="../code-walthroughs/#downloading-the-images">Code Walkthrough: Downloading the Images</a> to see how we used boto3 to download images.</p>
+<p>Also check out the <a href="https://boto3.amazonaws.com/v1/documentation/api/latest/index.html">official boto3 documentation</a> for more information.</p>
               
             </div>
           </div>

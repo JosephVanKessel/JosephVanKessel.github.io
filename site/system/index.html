@@ -66,21 +66,19 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#structure-of-jupyter-notebook">Structure of Jupyter Notebook</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#data-processing">Data Processing</a>
+    <li class="toctree-l2"><a class="reference internal" href="#data-overview">Data Overview</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#raw-data">Raw Data</a>
+    <li class="toctree-l3"><a class="reference internal" href="#images">Images</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#list-files">List Files</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#processing-the-raw-data">Processing the Raw Data</a>
-        <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#downloading-images-from-s3">Downloading Images From S3</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#generating-list-files">Generating List Files</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#create-dataset-using-recordio">Create Dataset Using RecordIO</a>
-    </li>
         </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#data-processing">Data Processing</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#downloading-images-from-s3">Downloading Images From S3</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#create-dataset-using-recordio">Create Dataset Using RecordIO</a>
     </li>
         </ul>
     </li>
@@ -237,13 +235,12 @@
 
 <p>As you can see different files in the Jupyter Notebook use different datasets. This means that we are able to train a model with either 50-label images, or 334-label images.</p>
 <hr />
-<h2 id="data-processing">Data Processing</h2>
-<p>The first component of the system is responsible for creating usable training data by processing the raw data we had access to. </p>
-<h3 id="raw-data">Raw Data</h3>
-<p>The raw data consisted of ~155,000 classified images stored in S3. Each image can belong to one, or more of 334 classes. </p>
-<p>A list file includes the label data for each image as well as the path to the image in S3. We use the list file to associate the images and their classes.</p>
+<h2 id="data-overview">Data Overview</h2>
+<h3 id="images">Images</h3>
+<p>The raw data consists of ~155,000 classified images stored in S3. Each image can belong to one, or more of 334 classes. </p>
 <h3 id="list-files">List Files</h3>
-<p>List files are used to associate images with classes. Each line in the list file takes the following format:</p>
+<p>List files includes the label data for each image as well as the path to the image. We use the list file to associate the images and their classes.
+Each line in the list file takes the following format:</p>
 <pre><code>Image-ID   label_1   label_2  ...  label_334    Image-Path
 </code></pre>
 <p>The labels represent the classes that images can belong to. Label values can either be 0, meaning the image does not belong to that class, or 1 meaning the image does belong to that class.</p>
@@ -261,43 +258,29 @@
 <p><strong>Note:</strong> The column headers would not be included in the List file.</p>
 <p>We can see that the first label is flower, the second is leaf and the third is blue. So, image1.jpg belongs to the class flower only, image2.jpg is belongs to both the leaf and blue class and image3.jpg belongs to all three classes.</p>
 <p>List files are a crucial part of processing the data. They contain the label data associated with each image. Each image and its label data will be packed into the final format of the training dataset. </p>
-<h3 id="processing-the-raw-data">Processing the Raw Data</h3>
-<p>Using the raw images for training is possible, but inefficient. Processing the images allowed for faster training and less resource consumption.</p>
-<p>Processing the images involved the following steps:</p>
+<hr />
+<h2 id="data-processing">Data Processing</h2>
+<p>Using the raw images for training is possible, but inefficient. Processing the images allows for faster training and less resource consumption.</p>
+<p>Processing the images involves the following steps:</p>
 <ol>
-<li>Download raw images from S3.</li>
-<li>Generate list files.</li>
+<li>Download images from S3.</li>
 <li>Create dataset using RecordIO.</li>
 </ol>
 <h4 id="downloading-images-from-s3">Downloading Images From S3</h4>
 <p>We were provided a list file containing the label data and S3 location of every image: </p>
 <pre><code>    ID      labels 1-334      Path to image in S3
 </code></pre>
-<p>To download the images we used a python script to parse each line of the list file and get the S3 location of each image. Then, using a tool called boto3, we connect to S3 and download every image to a local machine.</p>
-<p>For more information about boto3 see <a href="../tands/">tools and services</a>.</p>
-<h4 id="generating-list-files">Generating List Files</h4>
-<p>After all of the images are downloaded we have to change the last column of the list file from the images path in S3 to the images path on the local machine.</p>
-<p>Old list file:</p>
-<pre><code>    ID      labels 1-334      Path to image in S3
-</code></pre>
-<p>Updated list file:</p>
-<pre><code>    ID      labels 1-334      Local path to downloaded image
-</code></pre>
-<p>We use a python script to update the paths of the list file while maintaining the original ID and label data.</p>
+<p>To download the images we used a python script to parse each line of the original list file, then write the S3 location of each image into a file called <code>s3-paths.txt</code>. Then, using a tool called boto3, we connect to S3 and download every image to a local machine.</p>
+<p>For more information on Boto3 see the <a href="../tands/#boto3">Tools and Services: Boto3</a>.</p>
+<p>Check out <a href="../code-walthroughs/#downloading-the-images">Code Walkthrough: Downloading the Images</a> to see how we downloaded the images.</p>
 <h4 id="create-dataset-using-recordio">Create Dataset Using RecordIO</h4>
-<p>With the images downloaded and the new list file created, we are ready to create the final dataset. </p>
 <p>We use MXNet's RecordIO data format for the dataset. This provides many benefits such as: reducing training time, reducing overall size of the dataset and more.</p>
 <p>We have to convert the raw images and the label data into the RecordIO data format. To do this we use a tool called im2rec.py provided by MXNet. This tool takes our list file and the root directory containing our images and produces a .rec dataset. </p>
-<p>The .rec file that im2rec.py generates can now be used as training data. We upload the dataset back to S3 and we are ready to use it for training.</p>
-<p>Additional Resources:</p>
-<ul>
-<li><a href="https://mxnet.apache.org/versions/1.8.0/api/faq/recordio">Using im2rec.py to create a dataset</a></li>
-<li><a href="https://mxnet.apache.org/versions/1.7/api/python/docs/api/mxnet/recordio/index.html">MXNet RecordIO documentation</a></li>
-</ul>
+<p>The .rec file that im2rec.py generates can be used as training data. We upload the dataset back to S3 and we are ready to use it for training.</p>
+<p>Check out <a href="../code-walthroughs/#code-walkthrough-creating-datasets">Code Walkthrough: Creating Datasets</a> to see how we created the datasets in the RecordIO format.</p>
 <hr />
 <h2 id="model-training">Model Training</h2>
-<p>The second component of the system is responsible for training models. We use Amazon SageMaker Notebook Instances to train, analyse and tune models. </p>
-<p>Training a machine Learning model with SageMaker is done through the notebook instance. Within the instance we write code to setup and run training jobs.</p>
+<p>Training a machine Learning model with SageMaker is done through the SageMaker Notebook instance. Within the instance we write code to setup and run training jobs.</p>
 <p>Training jobs in SageMaker include the following information:</p>
 <ul>
 <li>Location of training data.<ul>
@@ -323,28 +306,10 @@
 </li>
 </ul>
 <p>We write code in our notebook instance to specify all of this information before launching the training job. Additionally, we specify some model parameters that describe how the training should take place.</p>
-<p>Once the training job is launched from the notebook it will do the following:</p>
-<ol>
-<li>Create a compute instance where the training will take place.</li>
-<li>Download the training image.</li>
-<li>Download the training data.</li>
-<li>Train the model.</li>
-</ol>
-<p>Additional Resources:</p>
-<ul>
-<li><a href="../code-walthroughs/">Code Walkthroughs</a></li>
-<li><a href="https://www.youtube.com/watch?v=ym7NEYEx9x4">Video: Overview of SageMaker</a></li>
-<li><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/howitworks-create-ws.html">Create a Notebook Instance</a></li>
-<li><a href="https://docs.aws.amazon.com/sagemaker/?id=docs_gateway">Official Amazon SageMaker Documentation</a></li>
-</ul>
+<p>Check out <a href="../code-walthroughs/#code-walkthrough-training">Code Walkthrough: Training</a> and <a href="../code-walthroughs/#code-walkthrough-hyperparameter-tuning">Code Walkthrough: Hyperparameter Tuning</a> to see how we trained models from our Jupyter notebook.</p>
 <hr />
 <h2 id="model-deployment">Model Deployment</h2>
-<p>The final component of our system is responsible for deploying trained models. </p>
 <p>Trained models can be deployed to endpoints with sagemaker. The endpoint can then receive input data from a client application and pass it to the trained model. The models output is then returned back to the client application through the endpoint. </p>
-<p>Additional Resources:</p>
-<ul>
-<li><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works-deployment.html">Deploy a Model to an Endpoint in SageMaker</a></li>
-</ul>
               
             </div>
           </div>
