@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Tools and Services - Machine Learning for Tagging Graphic Designs</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Tools and Services";
+    var mkdocs_page_input_path = "tands.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Machine Learning for Tagging Graphic Designs</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../setup/">Setup Instructions</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Tools and Services</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#amazon-web-services-aws">Amazon Web Services (AWS)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#amazon-simple-storage-amazon-s3">Amazon Simple Storage (Amazon S3):</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#amazon-sagemaker">Amazon SageMaker:</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#notebook-instances">Notebook Instances:</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#recordio">RecordIO</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#boto3">Boto3</a>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../system/">System Overview</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../code-walthroughs/">Code Walkthroughs</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../resources/">Additional Resources</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Machine Learning for Tagging Graphic Designs</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Tools and Services</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="tools-and-services">Tools and Services</h1>
+<p>General information about some of the tools and services used in this project.</p>
+<hr />
+<h2 id="amazon-web-services-aws">Amazon Web Services (AWS)</h2>
+<p>Amazon Web services (AWS) is a cloud computing platform that we used to produce our trained model.</p>
+<p>We used two AWS services: </p>
+<ol>
+<li>Amazon Simple Storage</li>
+<li>Amazon SageMaker</li>
+</ol>
+<p>Lets take a look at these services in detail. </p>
+<h3 id="amazon-simple-storage-amazon-s3">Amazon Simple Storage (Amazon S3):</h3>
+<p>Amazon Simple Storage (Amazon S3) allows cloud-based data storage.</p>
+<p>We use Amazon S3 to store our training and validation data. After we created our processed datasets we uploaded them to S3. When training a model these datasets will be fetched from S3.</p>
+<h3 id="amazon-sagemaker">Amazon SageMaker:</h3>
+<p>Amazon SageMaker is a machine learning service that allows developers to train tune and deploy models. </p>
+<h4 id="notebook-instances">Notebook Instances:</h4>
+<p><em>SageMaker Notebook Instances</em> are machine learning compute instances that run the <em>Jupyter Notebook App</em>. These instances allow us to do a variety of tasks related to the production of machine learning models. </p>
+<p>After creating a <em>Notebook Instance</em> we can open a <em>Jupyter Notebook</em> within it. The <em>Jupyter Notebook</em> is where we write our code to: setup, run and evaluate training jobs. </p>
+<p>Check out our <a href="../code-walthroughs/">Code Walkthroughs</a> to see the code in our Jupyter Notebook.</p>
+<p>Additional Resources:</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=ym7NEYEx9x4">Video: Overview of SageMaker</a></li>
+<li><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/howitworks-create-ws.html">Create a Notebook Instance</a></li>
+<li><a href="https://docs.aws.amazon.com/sagemaker/?id=docs_gateway">Official Amazon SageMaker Documentation</a></li>
+<li><a href="https://docs.aws.amazon.com/s3/?id=docs_gateway">Official Amazon S3 documentation</a></li>
+<li><a href="https://docs.aws.amazon.com/">AWS documentation</a></li>
+</ul>
+<hr />
+<h2 id="recordio">RecordIO</h2>
+<p>Our data sets were created in the RecordIO data format. We used a tool called im2rec.py to convert images and label data into usable .rec files. </p>
+<p>For more information about how we created our datasets see <a href="../system/">System Overview</a>.</p>
+<p>For more information about MXNet's RecordIO data format and the im2rec.py tool see <a href="https://mxnet.apache.org/versions/1.8.0/api/faq/recordio">Creating a Dataset Using RecordIO</a>.</p>
+<h2 id="boto3">Boto3</h2>
+<p>We used the Boto3 AWS SDK to connect to Amazon S3 and download images. </p>
+<p>Check out the <a href="https://boto3.amazonaws.com/v1/documentation/api/latest/index.html">boto3 documentation</a> for more information.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../system/" class="btn btn-neutral float-right" title="System Overview">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../setup/" class="btn btn-neutral" title="Setup Instructions"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../setup/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../system/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
