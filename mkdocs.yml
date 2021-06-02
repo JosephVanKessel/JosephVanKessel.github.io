@@ -1,0 +1,10 @@
+site_name: Machine Learning for Tagging Graphic Designs
+theme: readthedocs
+nav:
+  - Home: 'index.md'
+  - Setup Instructions: 'setup.md'
+  - Tools and Services: 'tands.md'
+  - System Overview: 'system.md'
+  - Code Walkthroughs: 'code-walthroughs.md'
+  - Additional Resources: 'resources.md'
+  
